@@ -1,46 +1,54 @@
-Sample_ID,Species,Life History,Family,
-1,Cirsium undulatum,Forb,Asteraceae,
-2,Cirsium undulatum,Forb,Asteraceae,
-3,Cirsium undulatum,Forb,Asteraceae,
-4,Cirsium undulatum,Forb,Asteraceae,
-5,Quercus pungens,Shrub,Fagaceae,
-6,Quercus pungens,Shrub,Fagaceae,
-7,Quercus pungens,Tree,Fagaceae,
-8,Quercus pungens,Tree,Fagaceae,
-9,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,
-10,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,
-11,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,
-12,Amelanchier utahensis,Shrub,Rosaceae,
-13,Amelanchier utahensis,Shrub,Rosaceae,
-14,Asclepias asperula,Forb,Apocynaceae,
-15,Asclepias asperula,Forb,Apocynaceae,
-16,Asclepias asperula,Forb,Apocynaceae,
-17,Asclepias asperula,Forb,Apocynaceae,
-18,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,
-19,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,
-20,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,
-21,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,
-22,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,
-23,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,
-24,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,
-25,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,
-26,Hedeoma costata,Forb,Lamiaceae,
-27,Hedeoma costata,Forb,Lamiaceae,
-28,Mirabilis linearis,Forb,Nyctaginaceae,
-29,Mirabilis linearis,Forb,Nyctaginaceae,
-30,Mirabilis linearis,Forb,Nyctaginaceae,
-31,Morus celtidifolia (Morus microphylla),Tree,Moraceae,
-32,Morus celtidifolia (Morus microphylla),Tree,Moraceae,
-33,Morus celtidifolia (Morus microphylla),Tree,Moraceae,
-34,Panicum bulbosum ,Grass,Poaceae,
-35,Panicum bulbosum  ,Grass,Poaceae,
-36,Panicum bulbosum  (Asclepias brachystephana),Grass,Asclepiadaceae,
-37,Salvia summa,Forb,Lamiaceae,
-38,Salvia summa,Forb,Lamiaceae,
-39,Salvia summa,Forb,Lamiaceae,
-40,Salvia summa,Forb,Lamiaceae,
-41,Sporobolus contractus,Grass,Poaceae,
-42,Sporobolus cryptandrus,Grass,Poaceae,
-43,Sporobolus cryptandrus,Grass,Poaceae,
-44,Ungnadia speciosa,Tree,Sapindaceae,
-45,Ungnadia speciosa,Tree,Sapindaceae,
+sample_id,species,life_history,family,lifespan,photosynthesis_type,latitude,longitude,elevation_m,area,mass
+1,Cirsium undulatum,Forb,Asteraceae,Perennial,C3,31.89218331,-104.8150578,1719,54.76,11.5
+2,Cirsium undulatum,Forb,Asteraceae,Perennial,C3,31.962942,-104.791521,1727,92.99,12.8
+3,Cirsium undulatum,Forb,Asteraceae,Perennial,C3,32.1883,-104.4174,1307,83.71,7.9
+4,Cirsium undulatum,Forb,Asteraceae,Perennial,C3,32.131276,-104.335372,1051,78.73,8.9
+5,Quercus pungens,Shrub,Fagaceae,Perennial,C3,31.90595,-104.785781,1567,77.82,14.1
+6,Quercus pungens,Shrub,Fagaceae,Perennial,C3,31.824941,-104.532727,1195,107.23,19.4
+7,Quercus pungens,Tree,Fagaceae,Perennial,C3,32.131276,-104.335372,1051,57.35,10
+8,Quercus pungens,Tree,Fagaceae,Perennial,C3,31.824941,-104.532727,1195,80.91,10.4
+9,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,,C3,31.980313,-104.75605,1727,33.68,3.2
+10,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,,C3,31.980929,-104.782298,1727,33.85,3.1
+11,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,,C3,32.181781,-104.609031,1513,40.31,4
+12,Amelanchier utahensis,Shrub,Rosaceae,Perennial,C3,31.952635,-104.848962,2351,54.89,4.5
+13,Amelanchier utahensis,Shrub,Rosaceae,Perennial,C3,31.937327,-104.8795,1878,59.15,4.3
+14,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,31.895662,-104.826171,1719,42.17,7.8
+15,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,31.969336,-104.788482,1727,41.61,4.3
+16,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,32.140874,-104.552993,1616,71.85,7
+17,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,32.140874,-104.552993,1616,58.14,11.6
+18,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,Perennial,C3,31.889005,-104.885782,1487,82.85,8.1
+19,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,Perennial,C3,31.907831,-104.801526,1719,24.48,3.4
+20,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,Perennial,C3,31.889005,-104.885782,1487,37.11,5.4
+21,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,Perennial,C3,31.996416,-104.832879,2117,39.97,4.5
+22,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,Perennial,C4,31.823455,-104.484107,1179,45.61,3.2
+23,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,Perennial,C4,31.878228,-104.584754,1279,33.49,1.4
+24,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,Perennial,C4,31.878228,-104.584754,1279,40.43,2.4
+25,Digitaria cognatum (Leptoloma cognatum),Grass,Poaceae,Perennial,C4,31.878228,-104.584754,1279,29.64,1
+26,Hedeoma costata,Forb,Lamiaceae,Perennial,C3,31.969474,-104.790614,1727,69.79,5
+27,Hedeoma costata,Forb,Lamiaceae,Perennial,C3,31.99776,-104.833443,2101,59.51,5.2
+28,Mirabilis linearis,Forb,Nyctaginaceae,Perennial,C3,31.918281,-104.826611,2314,67.19,9.2
+29,Mirabilis linearis,Forb,Nyctaginaceae,Perennial,C3,31.918281,-104.826611,2314,67.17,9.8
+30,Mirabilis linearis,Forb,Nyctaginaceae,Perennial,C3,31.918281,-104.826611,2314,60.08,4.2
+31,Morus celtidifolia (Morus microphylla),Tree,Moraceae,Perennial,C3,31.933241,-104.888476,1878,96.46,7.6
+32,Morus celtidifolia (Morus microphylla),Tree,Moraceae,Perennial,C3,31.988307,-104.78627,1727,82.14,4.7
+33,Morus celtidifolia (Morus microphylla),Tree,Moraceae,Perennial,C3,31.988307,-104.78627,1727,74.68,9
+34,Panicum bulbosum ,Grass,Poaceae,Perennial,C4,31.90595,-104.785781,1567,72.57,2.9
+35,Panicum bulbosum  ,Grass,Poaceae,Perennial,C4,31.90595,-104.785781,1567,48.34,3.7
+36,Panicum bulbosum  (Asclepias brachystephana),Grass,Asclepiadaceae,Perennial,C4,31.868646,-104.475891,1140,45.69,1.7
+37,Salvia summa,Forb,Lamiaceae,Perennial,C3,31.962368,-104.791478,1727,72.29,3.9
+38,Salvia summa,Forb,Lamiaceae,Perennial,C3,31.933277,-104.889313,1878,74.16,8.5
+39,Salvia summa,Forb,Lamiaceae,Perennial,C3,Ê31.983448,-104.781059,1727,102.45,8.3
+40,Salvia summa,Forb,Lamiaceae,Perennial,C3,31.962004,-104.791521,1727,80.37,6.4
+41,Sporobolus contractus,Grass,Poaceae,Perennial,C4,31.852573,-104.552531,1220,39.33,1.6
+42,Sporobolus cryptandrus,Grass,Poaceae,Perennial,C4,31.050887,-104.750489,1188,58.55,3.1
+43,Sporobolus cryptandrus,Grass,Poaceae,Perennial,C4,30.305185,-101.320946,648,52.87,2.1
+44,Ungnadia speciosa,Tree,Sapindaceae,Perennial,C3,31.988716,-104.762489,1727,165.38,8.3
+45,Ungnadia speciosa,Tree,Sapindaceae,Perennial,C3,31.911317,-104.821855,1719,148.45,4.6
+46,Philadelphus hitchcockianus ,Shrub,Hydrangeaceae,Perennial,C3,,,,114.38,13.6
+47,Amelanchier utahensis,Shrub,Rosaceae,Perennial,C3,,,,215.79,14.8
+48,Amelanchier utahensis,Shrub,Rosaceae,Perennial,C3,,,,188.81,6.2
+49,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,,,,155.71,18.8
+50,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,,,,166.19,11.8
+51,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,,,,95.62,8.1
+52,Asclepias asperula,Forb,Apocynaceae,Perennial,C3,,,,87.33,13.5
+53,Cyphomeris gypsophiloides,Forb,Nyctaginaceae,Perennial,C3,,,,168.67,18.3
