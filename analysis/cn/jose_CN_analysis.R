@@ -9,6 +9,7 @@ library(car)
 library(emmeans)
 # install.packages('ggplot2')
 library(ggplot2)
+library(scales)
 
 ## load (i.e., read) the data
 cn_data = read.csv('../../data/cn/jose_gumo_1_results.csv')
@@ -77,12 +78,24 @@ Anova(lma_lmer)
 cld(emmeans(lma_lmer, ~PFT))
 emtrends(lma_lmer, ~1, var = 'elevation_m')
 
+### lma-nper correlation
+nperlma_lmer <- lmer(log(Nitrogen_Percent) ~ PFT * log(lma) + (1|family), 
+                  data = cn_species_data)
+plot(resid(nperlma_lmer) ~ fitted(nperlma_lmer))
+summary(nperlma_lmer)
+Anova(nperlma_lmer)
+cld(emmeans(nperlma_lmer, ~PFT))
+emtrends(nperlma_lmer, ~1, var = 'lma')
+
 ### results summary
 # biggest effect is elevation, where there is great N at higher elevation
 # follows predictions from Wang et al. (2017), which suggests
 # that plants increase leaf N at high elevation because of high water stress
 # more N allows them to maintain photosynthesis at lower stomatal conductance
 # could test this with the stomatal data from Zach
+# light also goes up so plants invest in more enzymes to use it for photosynthesis
+# temperature goes down as you increase elevation, so plants invest in more
+# enzymes because they are working more slowly
 
 ### make plots
 #### quick plots
@@ -98,18 +111,89 @@ nper_elevation_intercept = summary(emmeans(nper_lmer, ~1, at = list(elevation_m 
 nper_modeled = nper_elevation_slope * elevation_vector + nper_elevation_intercept
 nper_model_df = data.frame(elevation = elevation_vector, nper = nper_modeled)
 
-ggplot(data = cn_species_data, aes(x = elevation_m, y = Nitrogen_Percent, shape = PFT)) +
+nper_plot = ggplot(data = cn_species_data, aes(x = elevation_m, y = Nitrogen_Percent, 
+                                   shape = PFT, colour = PFT)) +
   theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15),
         axis.title.y=element_text(size=rel(2.5), colour = 'black'),
         axis.title.x=element_text(size=rel(2.5), colour = 'black'),
         axis.text.x=element_text(size=rel(2), colour = 'black'),
         axis.text.y=element_text(size=rel(2), colour = 'black'),
         panel.background = element_rect(fill = 'white', colour = 'black'),
         panel.grid.major = element_line(colour = "grey")) +
-  geom_point(colour = rgb(0, 0, 0, 0.5), size = 4) +
-  geom_line(data = nper_model_df, aes(x = elevation, y = exp(nper), shape = NULL), 
+  geom_point(alpha = 0.9, size = 4) +
+  geom_line(data = nper_model_df, aes(x = elevation, y = exp(nper), 
+                                      shape = NULL, colour = NULL), 
             size = 4, col = rgb(0, 0, 0, 0.7)) +
   ylab('Leaf N (%)') +
   xlab('Elevation (m)') +
   xlim(c(500, 2500)) +
   ylim(c(0, 5))
+
+jpeg('plots/nper_plot.jpeg',
+     width = 8, height = 8, units = 'in', res = 600)
+plot(nper_plot)
+dev.off()
+
+##### cn x elevation
+cn_elevation_slope = summary(emtrends(cn_lmer, ~1, var = 'elevation_m'))[1, 2]
+cn_elevation_intercept = summary(emmeans(cn_lmer, ~1, at = list(elevation_m = 0)))[1, 2]
+cn_modeled = cn_elevation_slope * elevation_vector + cn_elevation_intercept
+cn_model_df = data.frame(elevation = elevation_vector, cn = cn_modeled)
+
+cn_plot = ggplot(data = cn_species_data, aes(x = elevation_m, y = cn, 
+                                   shape = PFT, colour = PFT)) +
+  theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15), 
+        axis.title.y=element_text(size=rel(2.5), colour = 'black'),
+        axis.title.x=element_text(size=rel(2.5), colour = 'black'),
+        axis.text.x=element_text(size=rel(2), colour = 'black'),
+        axis.text.y=element_text(size=rel(2), colour = 'black'),
+        panel.background = element_rect(fill = 'white', colour = 'black'),
+        panel.grid.major = element_line(colour = "grey")) +
+  geom_point(alpha = 0.9, size = 4) +
+  geom_line(data = cn_model_df, aes(x = elevation, y = exp(cn), 
+                                      shape = NULL, colour = NULL), 
+            size = 4, col = rgb(0, 0, 0, 0.7)) +
+  ylab('Leaf C:N') +
+  xlab('Elevation (m)') +
+  xlim(c(500, 2500)) +
+  ylim(c(0, 60))
+
+jpeg('plots/cn_plot.jpeg',
+     width = 8, height = 8, units = 'in', res = 600)
+plot(cn_plot)
+dev.off()
+
+##### nper-lma trend (to show fast-slow tradeoff)
+# lma_vector = seq(min(cn_species_data$lma, na.rm = T), 
+#                        max(cn_species_data$lma, na.rm = T), 0.01)
+# nperlma_slope = summary(emtrends(nperlma_lmer, ~1, var = 'log(lma)'))[1, 2]
+# nperlma_intercept = summary(emmeans(nperlma_lmer, ~1, at = list(lma = 0)))[1, 2]
+# nperlma_modeled = nperlma_slope * lma_vector + nperlma_intercept
+# nperlma_model_df = data.frame(lma = lma_vector, nper = nperlma_modeled)
+
+nperlma_plot = ggplot(data = cn_species_data, aes(x = log(lma), y = log(Nitrogen_Percent), 
+                                             shape = PFT, colour = PFT)) +
+  theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15), 
+        axis.title.y=element_text(size=rel(2.5), colour = 'black'),
+        axis.title.x=element_text(size=rel(2.5), colour = 'black'),
+        axis.text.x=element_text(size=rel(2), colour = 'black'),
+        axis.text.y=element_text(size=rel(2), colour = 'black'),
+        panel.background = element_rect(fill = 'white', colour = 'black'),
+        panel.grid.major = element_line(colour = "grey")) +
+  geom_point(alpha = 0.9, size = 4) +
+  # geom_line(data = cn_model_df, aes(x = lma, y = exp(cn), 
+  #                                   shape = NULL, colour = NULL), 
+  #           size = 4, col = rgb(0, 0, 0, 0.7)) +
+  ylab('Log Leaf N (%)') +
+  xlab(expression('Log Leaf Mass per Area (' * 'g mm'^'-2' * ')')) +
+  xlim(c(-3.5, -1.5)) +
+  ylim(c(0, 2))
+
+
+
