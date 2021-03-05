@@ -136,6 +136,29 @@ jpeg('plots/nper_plot.jpeg',
 plot(nper_plot)
 dev.off()
 
+nper_plot_woody = ggplot(data = cn_species_data, 
+                       aes(x = PFT, y = Nitrogen_Percent, colour = woody)) +
+  theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15),
+        axis.title.y=element_text(size=rel(2.5), colour = 'black'),
+        axis.title.x=element_text(size=rel(2.5), colour = 'black'),
+        axis.text.x=element_text(size=rel(2), colour = 'black'),
+        axis.text.y=element_text(size=rel(2), colour = 'black'),
+        panel.background = element_rect(fill = 'white', colour = 'black'),
+        panel.grid.major = element_line(colour = "grey")) +
+  geom_boxplot(outlier.size = NA, size = 1) +
+  geom_jitter(size = 4, alpha = 0.9, width = 0.1) +
+  guides(colour = guide_legend(title = NULL)) +
+  scale_color_discrete(labels = c('Herbaceous', 'Woody')) +
+  ylab('Leaf N (%)') +
+  xlab('Plant Functional Type')
+
+jpeg('plots/nper_plot_woody.jpeg',
+     width = 8, height = 8, units = 'in', res = 600)
+plot(nper_plot_woody)
+dev.off()
+
 ##### cn x elevation
 cn_elevation_slope = summary(emtrends(cn_lmer, ~1, var = 'elevation_m'))[1, 2]
 cn_elevation_intercept = summary(emmeans(cn_lmer, ~1, at = list(elevation_m = 0)))[1, 2]
@@ -165,6 +188,29 @@ cn_plot = ggplot(data = cn_species_data, aes(x = elevation_m, y = cn,
 jpeg('plots/cn_plot.jpeg',
      width = 8, height = 8, units = 'in', res = 600)
 plot(cn_plot)
+dev.off()
+
+cn_plot_woody = ggplot(data = cn_species_data, 
+                         aes(x = PFT, y = cn, colour = woody)) +
+  theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15),
+        axis.title.y=element_text(size=rel(2.5), colour = 'black'),
+        axis.title.x=element_text(size=rel(2.5), colour = 'black'),
+        axis.text.x=element_text(size=rel(2), colour = 'black'),
+        axis.text.y=element_text(size=rel(2), colour = 'black'),
+        panel.background = element_rect(fill = 'white', colour = 'black'),
+        panel.grid.major = element_line(colour = "grey")) +
+  geom_boxplot(outlier.size = NA, size = 1) +
+  geom_jitter(size = 4, alpha = 0.9, width = 0.1) +
+  guides(colour = guide_legend(title = NULL)) +
+  scale_color_discrete(labels = c('Herbaceous', 'Woody')) +
+  ylab('Leaf C:N') +
+  xlab('Plant Functional Type')
+
+jpeg('plots/cn_plot_woody.jpeg',
+     width = 8, height = 8, units = 'in', res = 600)
+plot(cn_plot_woody)
 dev.off()
 
 ##### nper-lma trend (to show fast-slow tradeoff)
