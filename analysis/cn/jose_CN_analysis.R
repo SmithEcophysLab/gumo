@@ -33,6 +33,7 @@ hist(cn_species_data$Nitrogen_Percent)
 hist(cn_species_data$cn)
 hist(cn_species_data$lma)
 plot(cn_species_data$Sample_Weight, cn_species_data$Carbon_Weight)
+plot(cn_species_data$elevation_m, cn_species_data$Nitrogen_Percent)
 
 ## test hypotheses about herbaceous/woody
 ### make new column describing whether species is woody or not
