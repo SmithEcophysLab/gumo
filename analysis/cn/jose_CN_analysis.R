@@ -12,7 +12,8 @@ library(ggplot2)
 library(scales)
 
 ## load (i.e., read) the data
-cn_data = read.csv('../../data/cn/jose_gumo_1_results.csv')
+cn_data_raw = read.csv('../../data/cn/jose_gumo_results_clean.csv')
+cn_data = cn_data_raw[cn_data$Bad_Load == 0 & cn_data$Low_Response == 0,]
 species_info = read.csv('../../data/cn/species_information.csv', fileEncoding = 'Latin1')
 
 ## look at data
@@ -37,7 +38,6 @@ plot(cn_species_data$elevation_m, cn_species_data$Nitrogen_Percent)
 
 ## test hypotheses about herbaceous/woody
 ### make new column describing whether species is woody or not
-cn_species_data$woody <- NA
 cn_species_data$woody[cn_species_data$life_history == 'Forb' | cn_species_data$life_history == 'Grass'] <- 'no'
 cn_species_data$woody[cn_species_data$life_history == 'Shrub' | cn_species_data$life_history == 'Tree'] <- 'yes'
 
@@ -51,6 +51,13 @@ cn_species_data$PFT[cn_species_data$life_history == 'Shrub' &
                       cn_species_data$photosynthesis_type == 'C3'] <- 'C3 shrub'
 cn_species_data$PFT[cn_species_data$life_history == 'Tree' & 
                       cn_species_data$photosynthesis_type == 'C3'] <- 'C3 tree'
+
+### check variable type
+class(cn_species_data$PFT)
+class(cn_species_data$Nitrogen_Percent)
+
+### practice graph
+plot(as.factor(cn_species_data$PFT), cn_species_data$Nitrogen_Percent)
 
 ### test whether C/N ratios differ across plant type and environment
 cn_lmer <- lmer(log(cn) ~ PFT * elevation_m + (1|family), 
