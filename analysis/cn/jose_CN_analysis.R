@@ -13,7 +13,7 @@ library(scales)
 
 ## load (i.e., read) the data
 cn_data_raw = read.csv('../../data/cn/jose_gumo_results_clean.csv')
-cn_data = cn_data_raw[cn_data$Bad_Load == 0 & cn_data$Low_Response == 0,]
+cn_data = cn_data_raw[cn_data_raw$Bad_Load == 0 & cn_data_raw$Low_Response == 0,]
 species_info = read.csv('../../data/cn/species_information.csv', fileEncoding = 'Latin1')
 
 ## look at data
