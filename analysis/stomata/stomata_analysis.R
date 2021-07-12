@@ -69,18 +69,50 @@ head(all_data)
 colnames(all_data)
 all_data[,c(15, 22)]
 
+stomata_data = left_join(stomata.by.ttcNUM, species_info, by = c("TTCNum" = "TTCNumber"))
+head(stomata_data)
+
 ### make new column describing whether species is woody or not
 all_data$woody[all_data$LifeHistory.x == 'Forb' | all_data$LifeHistory.x == 'Grass'] <- 'no'
 all_data$woody[all_data$LifeHistory.x == 'Shrub' | all_data$LifeHistory.x == 'Tree'] <- 'yes'
 
+### do same for just stomata data
+stomata_data$woody[stomata_data$LifeHistory.x == 'Forb' | stomata_data$LifeHistory.x == 'Grass'] <- 'no'
+stomata_data$woody[stomata_data$LifeHistory.x == 'Shrub' | stomata_data$LifeHistory.x == 'Tree'] <- 'yes'
+
 ## statistical analyses
-stomata_lmer <- lmer((prop.stomata) ~ woody * Elevation.m. + (1|Family), 
-                  data = all_data)
+stomata_lmer <- lmer(log(prop.stomata) ~ woody * Elevation.m. + (1|Family), 
+                  data = stomata_data)
 plot(resid(stomata_lmer) ~ fitted(stomata_lmer))
 summary(stomata_lmer)
 Anova(stomata_lmer)
 cld(emmeans(stomata_lmer, ~woody))
 test(emtrends(stomata_lmer, ~1, var = 'Elevation.m.'))
+
+stomata_plot = ggplot(data = stomata_data, aes(x = Elevation.m., y = prop.stomata, 
+                                               shape = woody, colour = woody)) +
+  theme(legend.position = "right", 
+        legend.text=element_text(size=15),
+        legend.title=element_text(size=15),
+        axis.title.y=element_text(size=rel(2.5), colour = 'black'),
+        axis.title.x=element_text(size=rel(2.5), colour = 'black'),
+        axis.text.x=element_text(size=rel(2), colour = 'black'),
+        axis.text.y=element_text(size=rel(2), colour = 'black'),
+        panel.background = element_rect(fill = 'white', colour = 'black'),
+        panel.grid.major = element_line(colour = "grey")) +
+  geom_point(alpha = 0.9, size = 4) +
+  # geom_line(data = nper_model_df, aes(x = elevation, y = exp(nper), 
+  #                                     shape = NULL, colour = NULL), 
+  #           size = 4, col = rgb(0, 0, 0, 0.7)) +
+  ylab(expression('Stomatal density (m' ^ '2 ' * 'm' ^ '-2' *')')) +
+  xlab('Elevation (m)') +
+  xlim(c(500, 2500)) +
+  ylim(c(0, 0.3))
+
+jpeg('plots/stomata_plot.jpeg',
+     width = 8, height = 8, units = 'in', res = 600)
+plot(stomata_plot)
+dev.off()
 
 stomata_n_lmer <- lmer(log(Nitrogen_Percent) ~ prop.stomata * Elevation.m. * woody + (1|Family), 
                      data = all_data)
